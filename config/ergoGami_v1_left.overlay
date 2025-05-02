@@ -1,0 +1,100 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
+// GPIO configuration for the board
+&gpio0 {
+    status = "okay";  // Ensure gpio0 is enabled
+};
+
+&gpio1 {
+    status = "okay";  // Ensure gpio1 is enabled (only defined once)
+};
+
+// Root node configuration
+/ {
+    chosen {
+        zmk,kscan = &kscan0;           // Define key scan configuration
+        zmk,matrix_transform = &default_transform;
+        zmk,display = &nice_view;      // Point to the display device (nice_view)
+    };
+
+    // Keyboard matrix (6x4 left, 5x4 right)
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <6>;  // Left half: 6 columns
+        rows = <4>;     // Define number of rows
+        map = <
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) 
+            RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4) 
+            RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) 
+            RC(3,2) RC(3,3) RC(3,4)
+        >;
+    };
+
+    // Keyscan GPIO configuration
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        
+        diode-direction = "col2row";  // Set diode direction for the matrix
+        row-gpios = <
+            &gpio1 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 0 (P1.06)
+            &gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 1 (P1.15)
+            &gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 2 (P1.13)
+            &gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 3 (P1.11)
+        >;
+    };
+
+    // Widgets
+    layer_status: layer_status {
+        compatible = "zmk,layer-status";
+        status = "okay";
+        x = <0>;
+        y = <0>;
+        color = <0xFFFFFF>;  // White
+    };
+
+    battery_status: battery_status {
+        compatible = "zmk,battery-status";
+        status = "okay";
+        x = <50>;
+        y = <0>;
+        color = <0xFF0000>;  // Red
+    };
+
+    output_status: output_status {
+        compatible = "zmk,output-status";
+        status = "okay";
+        x = <100>;
+        y = <0>;
+        color = <0x00FF00>;  // Green
+    };
+};
+
+// ---- THIS IS OUTSIDE THE ROOT NODE! ----
+&spi1 {
+    status = "okay";
+    cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>; // <-- or whatever CS pin you are using
+
+    niceview: niceview@0 {
+        compatible = "waveshare,st7789v"; // depends on your NiceView model
+        reg = <0>;
+        spi-max-frequency = <8000000>;
+        label = "NiceView";
+        width = <240>;
+        height = <240>;
+        reset-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>; // <-- if you have RESET wired
+        dc-gpios = <&gpio0 19 GPIO_ACTIVE_LOW>; // <-- Data/Command pin
+        backlight-gpios = <&gpio0 21 GPIO_ACTIVE_HIGH>; // <-- optional
+
+        pinctrl-0 = <&spi1_default>;
+        pinctrl-names = "default";
+    };
+};
+
+&pinctrl {
+    spi1_default: spi1_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 17)>,  // SCK -> P0.17
+                    <NRF_PSEL(SPIM_MOSI, 0, 20)>; // MOSI -> P0.20
+        };
+    };
+};
