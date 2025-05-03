@@ -70,31 +70,3 @@
 };
 
 // ---- THIS IS OUTSIDE THE ROOT NODE! ----
-&spi1 {
-    status = "okay";
-    cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>; // <-- or whatever CS pin you are using
-
-    niceview: niceview@0 {
-        compatible = "waveshare,st7789v"; // depends on your NiceView model
-        reg = <0>;
-        spi-max-frequency = <8000000>;
-        label = "NiceView";
-        width = <240>;
-        height = <240>;
-        reset-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>; // <-- if you have RESET wired
-        dc-gpios = <&gpio0 19 GPIO_ACTIVE_LOW>; // <-- Data/Command pin
-        backlight-gpios = <&gpio0 21 GPIO_ACTIVE_HIGH>; // <-- optional
-
-        pinctrl-0 = <&spi1_default>;
-        pinctrl-names = "default";
-    };
-};
-
-&pinctrl {
-    spi1_default: spi1_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 17)>,  // SCK -> P0.17
-                    <NRF_PSEL(SPIM_MOSI, 0, 20)>; // MOSI -> P0.20
-        };
-    };
-};
