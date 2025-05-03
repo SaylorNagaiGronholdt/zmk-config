@@ -1,0 +1,15 @@
+# Define the keyboard name
+config ZMK_KEYBOARD_NAME
+    default "ergoGami_v1"
+
+# Enable split role if the left shield is present
+if SHIELD_ERGOGAMIV1_LEFT
+    config ZMK_SPLIT_ROLE_CENTRAL
+        default y
+endif
+
+# Enable split configuration if either left or right shield is present
+if SHIELD_ERGOGAMI_LEFT || SHIELD_ERGOGAMI_RIGHT
+    config ZMK_SPLIT
+        default y
+endif
