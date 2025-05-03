@@ -1,0 +1,17 @@
+if SHIELD_ERGOGAMIV1_LEFT
+
+# Name must be less than 16 characters long!
+config ZMK_KEYBOARD_NAME
+    default "ergoGami_v1"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_ERGOGAMI_LEFT || SHIELD_ERGOGAMI_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif
