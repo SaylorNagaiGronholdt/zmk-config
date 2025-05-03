@@ -41,15 +41,4 @@
             &gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 3 (P1.11)
         >;
     };
-
-    nice_view_behavior: behavior_nice_view {
-        compatible = "zmk,behavior-nice-view";
-        #binding-cells = <0>;
-        display = <&nice_view>;
-        widgets = <
-            &layer_status
-            &battery_status
-            &output_status
-        >;
-    };
 };
