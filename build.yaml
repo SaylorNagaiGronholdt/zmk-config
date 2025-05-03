@@ -20,6 +20,6 @@
 ---
 include:
   - board: nice_nano_v2
-    shield: ergoGami_v1_left
+    shield: ergoGami_v1_left nice_view
   - board: nice_nano_v2
-    shield: ergoGami_v1_right
+    shield: ergoGami_v1_right nice_view
