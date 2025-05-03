@@ -70,3 +70,8 @@
 };
 
 // ---- THIS IS OUTSIDE THE ROOT NODE! ----
+&spi1 {
+    nice_view_spi: spi@0 {
+        // your device
+    };
+};
