@@ -1,0 +1,14 @@
+file_format: "1"
+id: ergogamiv1
+name: ergoGami_v1
+type: shield
+url: https://github.com/SaylorNagaiGronholdt/ergoGami-v1-zmk-config.git
+requires: [pro_micro]
+exposes: [i2c_nice_view]
+features:
+  - keys
+  - display
+siblings:
+  - corne_left
+  - corne_right
+  
