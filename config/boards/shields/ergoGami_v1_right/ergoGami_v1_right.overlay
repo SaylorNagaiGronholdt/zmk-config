@@ -13,7 +13,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
-        zmk,display = &nice_view;
+        // zmk,display = &nice_view;
     };
 
     // Keyboard matrix (6x4 left, 5x4 right)
