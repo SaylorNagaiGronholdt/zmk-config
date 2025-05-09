@@ -1,4 +1,4 @@
-# Define the keyboard name
+# Define the keyboard name. Must be less than 16 characters long!
 config ZMK_KEYBOARD_NAME
     default "ergoGami_v1"
 
