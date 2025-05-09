@@ -14,7 +14,7 @@
     chosen {
         zmk,kscan = &kscan0;           // Define key scan configuration
         zmk,matrix_transform = &default_transform;
-        // zmk,display = &nice_view;      // Point to the display device (nice_view)
+        zmk,display = &nice_view;      // Point to the display device (nice_view)
     };
 
     // Keyboard matrix (6x4 left, 5x4 right)
@@ -41,7 +41,7 @@
             &gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 2 (P1.13)
             &gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 3 (P1.11)
         >;
-    
+
         col-gpios = <
             &gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
             &gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
