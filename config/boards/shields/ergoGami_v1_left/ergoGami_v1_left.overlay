@@ -19,7 +19,7 @@
     // Keyboard matrix (5x4 left, 5x4 right)
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
-        columns = <5>;  // Left half: 6 columns
+        columns = <6>;  // Left half: 6 columns
         rows = <4>;     // Define number of rows
         map = <
             // Left half (18 keys)
